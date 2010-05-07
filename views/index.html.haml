@@ -14,9 +14,9 @@
           %h4!= update.profile_nickname
           %p.time!= format(update.pubDate)
         %p.update.clear
-          - if (update.imgURL)
-            %img{ src: update.imgURL, alt: update.title }
-          - if (!update.imgURL)
+          - if (update.mimgURL)
+            %img{ src: update.mimgURL, alt: update.title }
+          - if (!update.mimgURL)
             %span!= update.title
 
 .clear
