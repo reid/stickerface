@@ -39,7 +39,7 @@ get("/", function () {
 });
 
 get("/style/*.css", function (file) {
-    this.render(file + ".css.sass");
+    this.render(file + ".css.sass", { layout : false });
 });
 
 get("/yui", function () {
