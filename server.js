@@ -11,12 +11,34 @@ configure(function(){
 });
 
 get("/", function () {
-    this.render("index.html.haml", {
-        locals : {
-            title : "Welcome",
-            env : process.env.EXPRESS_ENV
+    var express = this;
+
+    var query = require("./lib/jsoauth/api");
+    var html = "";
+
+    query.makeRequest(
+        "http://query.yahooapis.com/v1/yql",
+        [
+            "q=select%20%2A%20from%20social.updates.search%20where%20query%20%3D%20%22yahoo%22",
+            "format=json"
+        ],
+        function (error, data, response) {
+            if (error) return;
+            data = JSON.parse(data);
+            var results = data.query.results.update;
+            var html  = "";
+            results.forEach(function (update) {
+                html += update.title + ", ";
+            });
+            express.render("index.html.haml", {
+                locals : {
+                    title : html,
+                    env : process.env.EXPRESS_ENV
+                }
+            });
         }
-    });
+    ); 
+
 });
 
 get("/yui", function () {
@@ -32,6 +54,6 @@ get("/yui", function () {
 });
 
 run(
-    parseInt(process.env.PORT || 8000, 10),
+    parseInt(process.env.PORT || 8000),
     null
 );
