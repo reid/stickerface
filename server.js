@@ -37,12 +37,16 @@ function firehose (q, config, callback) {
 }
 
 get("/", function () {
+    var q = this.param("q");
+    if (!q) q = "hackday";
+
+    this.redirect("/discover/" + q);
+});
+
+get("/discover/:query", function (q) {
     var express = this;
 
     var html = "";
-
-    var q = express.param("q");
-    if (!q) q = "ipad";
 
     firehose(q, { count: 50 }, function (error, data, response) {
         if (error) throw new Error("YQL Error: " + error);
