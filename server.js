@@ -5,8 +5,10 @@ require.paths.unshift("lib");
 var YUI = require("node-yui3").YUI;
 
 require("express");
+require("express/plugins");
 
 configure(function(){
+    use(Static);
     set("root", __dirname);
 });
 
@@ -31,6 +33,7 @@ get("/", function () {
             var results = data.query.results.update;
             express.render("index.html.haml", {
                 locals : {
+                    q : q,
                     updates : results
                 }
             });

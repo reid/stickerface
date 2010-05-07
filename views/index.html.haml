@@ -1,10 +1,12 @@
 #masthead
   %form{ action: "/", method: "get" }
-    %input#q.box{ type: "text", name: "q" }
+    %input#q.box{ type: "text", name: "q", value: q }
     %input.submit{ type: "submit" }
 
 %h2 Welcome to Stickerfate
 #main
-  %ul
-    - each update in updates
-      %li!= update.title
+  %ul.wall
+    - each update, index in updates
+      %li{ class : (index % 5) ? "" : "clear" }
+        %img{ src: update.profile_displayImage, alt: update.profile_nickname }
+        %p!= update.title
