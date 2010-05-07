@@ -10,6 +10,6 @@ query.makeRequest(
     function (error, data, response) {
         if (error) return;
         data = JSON.parse(data);
-        sys.debug(sys.inspect(data));        
+        sys.debug(sys.inspect(data.query.results.update));
     }
 ); 
