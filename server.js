@@ -18,8 +18,6 @@ function firehose (q, config, callback) {
     var count = config.count || 10;
     var source = config.source || "*";
     var since = config.since || 0;
-    var flickrCount = Math.floor(count * .333);
-    var noisyCount = Math.floor(count * .666);
 
     query.makeRequest(
         "http://query.yahooapis.com/v1/yql",
@@ -28,8 +26,6 @@ function firehose (q, config, callback) {
             + "%20and%20min_date%3D%22" + since + "%22%20and%20source%3D%22" + source + "%22"
             + "%20and%20dedupe%3D%22true%22"
             ,
-            // "q=select%20%2A%20from%20query.multi%20where%20queries%3D%22select%20%2A%20from%20social.updates.search(" + flickrCount + ")%20where%20query%3D'" + q + "'%20and%20source%3D'flickr'%3B%20select%20%2A%20from%20social.updates.search(" + noisyCount + ")%20where%20query%3D'" + q + "'%3B",
-            // "env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys",
             "format=json"
         ],
         callback
