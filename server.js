@@ -100,6 +100,10 @@ get("/yui", function () {
     });
 });
 
+get("/favicon.ico", function () {
+    this.sendfile(set("root") + "/public/images/favicon.ico");
+});
+
 run(
     parseInt(process.env.PORT || 8000),
     null
