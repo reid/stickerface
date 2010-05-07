@@ -13,6 +13,10 @@
         %div.author
           %h4!= update.profile_nickname
           %p.time!= format(update.pubDate)
-        %p.clear!= update.title
+        %p.update.clear
+          - if (update.imgURL)
+            %img{ src: update.imgURL, alt: update.title }
+          - if (!update.imgURL)
+            %span!= update.title
 
 .clear
