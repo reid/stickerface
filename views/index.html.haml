@@ -1,10 +1,11 @@
 #masthead
   %form{ action: "/", method: "get" }
     %input#q.box{ type: "text", name: "q", value: q }
-    %input.submit{ type: "submit" }
+    %input.submit{ type: "submit", value: "Search" }
 
-%h2 Welcome to Stickerfate
-#main
+.clear
+
+#bd
   %ul.wall
     - each update, index in updates
       %li{ class : (index % 5) ? "" : "clear" }
@@ -13,3 +14,5 @@
           %h4!= update.profile_nickname
           %p.time!= format(update.pubDate)
         %p.clear!= update.title
+
+.clear
