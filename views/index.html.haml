@@ -9,4 +9,7 @@
     - each update, index in updates
       %li{ class : (index % 5) ? "" : "clear" }
         %img{ src: update.profile_displayImage, alt: update.profile_nickname }
-        %p!= update.title
+        %div.author
+          %h4!= update.profile_nickname
+          %p.time!= format(update.pubDate)
+        %p.clear!= update.title

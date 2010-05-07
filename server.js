@@ -31,11 +31,19 @@ get("/", function () {
             if (error) throw new Error("YQL Error: " + error);
             data = JSON.parse(data);
             var results = data.query.results.update;
-            express.render("index.html.haml", {
-                locals : {
-                    q : q,
-                    updates : results
-                }
+            YUI().use("datatype-date", function (yui) {
+                var format = function (str) {
+                    return yui.DataType.Date.format(new Date(parseInt(str) * 1000), {
+                        format : "%b %d %l:%M %P"
+                    });
+                };
+                express.render("index.html.haml", {
+                    locals : {
+                        format : format,
+                        q : q,
+                        updates : results
+                    }
+                });
             });
         }
     ); 
