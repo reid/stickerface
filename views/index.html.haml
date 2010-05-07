@@ -1,6 +1,10 @@
+#masthead
+  %form{ action: "/", method: "get" }
+    %input#q.box{ type: "text", name: "q" }
+    %input.submit{ type: "submit" }
+
 %h2 Welcome to Stickerfate
 #main
   %ul
     - each update in updates
       %li= update.title
-  %p= env 

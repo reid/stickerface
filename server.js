@@ -16,25 +16,30 @@ get("/", function () {
     var query = require("./lib/jsoauth/api");
     var html = "";
 
+    var q = express.param("q");
+    if (!q) q = "yahoo";
+
     query.makeRequest(
         "http://query.yahooapis.com/v1/yql",
         [
-            "q=select%20%2A%20from%20social.updates.search%20where%20query%20%3D%20%22yahoo%22",
+            "q=select%20%2A%20from%20social.updates.search%20where%20query%20%3D%20%22" + q + "%22",
             "format=json"
         ],
         function (error, data, response) {
-            if (error) return;
+            if (error) throw new Error("YQL Error: " + error);
             data = JSON.parse(data);
             var results = data.query.results.update;
             express.render("index.html.haml", {
                 locals : {
-                    updates : results,
-                    env : process.env.EXPRESS_ENV
+                    updates : results
                 }
             });
         }
     ); 
+});
 
+get("/style/*.css", function (file) {
+    this.render(file + ".css.sass");
 });
 
 get("/yui", function () {
