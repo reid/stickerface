@@ -18,4 +18,7 @@ get("/", function () {
     });
 });
 
-run(process.env.PORT || 8000, null);
+run(
+    parseInt(process.env.PORT || 8000, 10),
+    null
+);
