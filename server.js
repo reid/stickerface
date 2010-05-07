@@ -19,7 +19,7 @@ get("/", function () {
     var html = "";
 
     var q = express.param("q");
-    if (!q) q = "yahoo";
+    if (!q) q = "ipad";
 
     query.makeRequest(
         "http://query.yahooapis.com/v1/yql",
