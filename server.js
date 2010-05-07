@@ -26,13 +26,9 @@ get("/", function () {
             if (error) return;
             data = JSON.parse(data);
             var results = data.query.results.update;
-            var html  = "";
-            results.forEach(function (update) {
-                html += update.title + ", ";
-            });
             express.render("index.html.haml", {
                 locals : {
-                    title : html,
+                    updates : results,
                     env : process.env.EXPRESS_ENV
                 }
             });

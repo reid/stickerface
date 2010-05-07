@@ -1,4 +1,6 @@
 %h2 Welcome to Stickerfate
 #main
-  %p= title
+  %ul
+    - each update in updates
+      %li= update.title
   %p= env 
